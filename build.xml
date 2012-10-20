@@ -49,7 +49,7 @@
                 <modified />
             </fileset>
 
-            <fileset dir="${basedir}/tests">
+            <fileset dir="${basedir}/UnitTests">
                 <include name="**/*.php" />
                 <modified />
             </fileset>
