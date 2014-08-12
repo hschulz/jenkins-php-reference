@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Name:     index.php (UTF-8)
+ * Name:     bootstrap.php (UTF-8)
  * Author:   Hauke Schulz <hauke27@googlemail.com>
  * Date:     2012-10-18
  * Language: PHP 5.4
@@ -10,47 +10,44 @@
  * Description:
  * ------------
  *
- * (de) Das ist eine Beispielinstallation des PSR-0 Autoloaders.
- * (en) This is an example implementation of the PSR-0 autoloader.
+ * This is an example implementation of the PSR-0 autoloader.
  *
  * https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
  */
 
 /**
- * (de)<br/>
- * (en)
+ *
  *
  * @author Hauke Schulz <hauke27@googlemail.com>
- * @param string $sClassName
+ * @license http://www.opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @param string $className
  * @return boolean
  */
-function example_autoloader($sClassName) {
+function example_autoloader($className) {
 
-    $bIsLoaded = false;
+    $isLoaded = false;
 
-    $sClassName = ltrim($sClassName, '\\');
+    $className = ltrim($className, '\\');
 
-    $sFile  = '';
-    $sClass = '';
-    $sNamespace = '';
+    $file  = '';
+    $class = '';
+    $namespace = '';
 
-    if (($iPos = strripos($sClassName, '\\')) !== false) {
-        $sNamespace = substr($sClassName, 0, $iPos);
-        $sClass = substr($sClassName, $iPos + 1);
-        $sFile  = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $sNamespace) . DIRECTORY_SEPARATOR;
+    if (($pos = strripos($className, '\\')) !== false) {
+        $namespace = substr($className, 0, $pos);
+        $class = substr($className, $pos + 1);
+        $file  = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
 
-    $sFile .= str_replace('_', DIRECTORY_SEPARATOR, $sClass) . '.php';
+    $file .= str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 
-    if (is_file($sFile)) {
-        require_once $sFile;
-        $bIsLoaded = true;
+    if (is_file($file)) {
+        require_once $file;
+        $isLoaded = true;
     }
 
 
-    return $bIsLoaded;
+    return $isLoaded;
 }
 
 spl_autoload_register('example_autoloader');
-
-?>
